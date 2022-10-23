@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} - Bulk Register Students{% endblock %}
+{% block header %}<h1>Bulk Register Students</h1>{% endblock %}
+{% block content %}
+<form enctype="multipart/form-data" method="POST" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>
+        Each line should be of the format: gav-id,first-name,last-name<br>
+        Ex. 123456,John,Smith
+    </p>
+    <button>Register</button>
+</form>
+{% endblock %}

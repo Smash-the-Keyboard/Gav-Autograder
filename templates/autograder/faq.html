@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %} - FAQ{% endblock %}
+{% block header %}<h1>Frequently Asked Questions</h1>{% endblock %}
+{% block content %}
+<ul id="faq-list">
+    <li>
+        <span class="faq-question">Q. How do I log in?</span>
+        <br>
+        A. Log in with your Gavilan student ID (G00 number) <a href="{% url 'student_login' %}">here</a>.
+    </li>
+    <br>
+    <li>
+        <span class="faq-question">Q. Do I have to submit before the due date?</span>
+        <br>
+        A. It is possible to submit your program at any time, but your instructor does see if and when you submit.
+    </li>
+    <br>
+    <li>
+        <span class="faq-question">Q. How many submissions can I make?</span>
+        <br>
+        A. You may make up to 10 submissions per assignment.
+    </li>
+    <br>
+    <li>
+        <span class="faq-question">Q. Can I undo a submission that I've already confirmed?</span>
+        <br>
+        A. No, you can only cancel unconfirmed submissions.
+    </li>
+    <br>
+    <li>
+        <span class="faq-question">Q. Is the percentage grade I get for a submission official?</span>
+        <br>
+        A. The percentage grade is not official, and does not directly affect your actual grade. It is a quick indicator of how many test cases your program passed.
+    </li>
+    <br>
+    <li>
+        <span class="faq-question">Q. Some of the test cases don't have any input, is this normal?</span>
+        <br>
+        A. Normally, yes. Many test cases do not require input. However, if a test case seems like it should have input but does not, let your instructor know.
+    </li>
+    <br>
+    <li>
+        <span class="faq-question">Q. Why doesn't the input for my program show up in the output like when I run it on my own computer?</span>
+        <br>
+        A. The Autograder only checks what your program actually outputs itself. The input isn't part of that, so it does not show up in the test results. It is normal for the output to be different from what you might see when running the program in a terminal.
+    </li>
+    <br>
+    <li>
+        <span class="faq-question">Q. What is the "\n" that keeps showing up in test cases and in my program's output?</span>
+        <br>
+        A. "\n" is a visual representation of the new line character. It helps show, for example, if there are blank spaces at the end of a line, or if there is a new line character at the end of a program's output. Both of these things would be hard to know without seeing where the new line characters are. It can be differentiated from the literal "\" and "n" characters by its light color and border.
+    </li>
+</ul>
+<p>Contact your instructor if you have any other questions.</p>
+{% endblock %}

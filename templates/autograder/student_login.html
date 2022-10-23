@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} - Login{% endblock %}
+{% block header %}<h1>Student Login</h1>{% endblock %}
+{% block content %}
+<form method="POST" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Login</button>
+</form>
+<p style="text-align: right;"><a href="{% url 'staff_login' %}">Staff Login</a></p>
+{% endblock %}

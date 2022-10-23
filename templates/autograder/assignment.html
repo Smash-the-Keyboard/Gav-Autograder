@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %} - {{ object }}{% endblock %}
+{% block header %}<h1>{{ object }}</h1>{% endblock %}
+{% block content %}
+<p>From <a href="{% url 'view_course' object.course.pk %}">{{ object.course }}</a></p>
+<h2><u>Test Cases</u></h2>
+{% if user.is_staff %}
+<table>
+    <thead>
+        <tr>
+            <td>Test Case</td>
+            <td>Staff Actions</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for testcase in object.testcase_set.all %}
+        <tr>
+            <td><a href="{% url 'view_testcase' testcase.pk %}">Test Case #{{ testcase.pk }}</a></td>
+            <td><a href="{% url 'delete_testcase' testcase.pk %}">Delete</a></td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="2">This assignment has no test cases.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<h3><u>Staff Actions</u></h3>
+<ul>
+    <li><a href="{% url 'view_assignment_submissions' object.pk %}">View Submissions</a></li>
+    <li><a href="{% url 'create_testcase' %}?assignment={{ object.id }}">Create Test Case</a></li>
+</ul>
+{% else %}
+    {% if object.testcase_set.all %}
+        <ol>
+            {% for testcase in object.testcase_set.all %}
+            <li><a href="{% url 'view_testcase' testcase.pk %}">Test Case</a></li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p>No test cases are currently available.</p>
+    {% endif %}
+    <h2><u>Your Submissions</u></h2>
+    {% if user_submissions|length < 10 and not user_has_unconfirmed_submission %}
+        <p><a href="{% url 'create_submission' object.pk %}">Upload a new submission</a></p>
+    {% endif %}
+    {% ifequal user_submissions|length 10 %}
+        <p>You have reached the maximum number of submissions permitted for this assignment.</p>
+    {% endifequal %}
+    <ul>
+        {% for submission in user_submissions %}
+            <li>
+                <a href="{% url 'view_submission' submission.pk %}">
+                    {% if submission.confirmed %}
+                        Submission {{ forloop.revcounter }} - {{ submission.date }}
+                    {% else %}
+                        Unconfirmed submission
+                    {% endif %}
+                </a>
+            </li>
+        {% empty %}
+            <li>No submissions</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

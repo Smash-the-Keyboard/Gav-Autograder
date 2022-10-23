@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load autograder_filters %}
+{% block title %} - Submissions{% endblock %}
+{% block header %}<h1>Submissions for {{ assignment.title }}</h1>{% endblock %}
+{% block content %}
+<form autocomplete="off">
+    <input type="checkbox" id="check-include-unconfirmed"> Include Unconfirmed Submissions
+</form>
+<table class="paged-table">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Status</th>
+            <th>Grade</th>
+            <th>Date/Time</th>
+            <th>Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for submission in object_list %}
+        <tr>
+            <td><a href="{% url 'view_student' submission.student.username %}">{{ submission.student.get_full_name }} (G00 {{ submission.student.username }})</a></td>
+            <td>{% if submission.confirmed %}Confirmed{% else %}Unconfirmed{% endif %}</td>
+            <td>{{ submission|submissiongrade }}</td>
+            <td>{{ submission.date }}</td>
+            <td><a href="{% url 'view_submission' submission.pk %}">View</a></td>            
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">No submissions exist for this assignment</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+{% load static %}
+{% block scripts %}
+	<script type="text/javascript" charset="utf-8" src="{% static 'table_script.js' %}"></script>
+{% endblock %}

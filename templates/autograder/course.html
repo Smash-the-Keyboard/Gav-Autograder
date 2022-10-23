@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} - {{ object }}{% endblock %}
+{% block header %}<h1>{{ object }}</h1>{% endblock %}
+{% block content %}
+<h2><u>Assignments</u></h2>
+<table>
+    <thead>
+        <tr>
+            <th>Assignment</th>
+            {% if user.is_staff %}
+            <th>Staff Actions</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for assignment in assignment_set %}
+        <tr>
+            <td><a href="{% url 'view_assignment' assignment.pk %}">{{ assignment }}</a></td>
+            {% if user.is_staff %}
+                <td><a href="{% url 'delete_assignment' assignment.pk %}">Delete</a></td>
+            {% endif %}
+        </tr>
+        {% empty %}
+        <tr><td colspan="2">No assignments are available at this time</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% if user.is_staff %}
+    <br>
+    <h3><u>Staff Actions</u></h3>
+    <ul>
+        <li><a href="{% url 'create_assignment' %}?course={{ object.id }}">Create Assignment</a></li>
+    </ul>
+{% endif %}
+{% endblock %}

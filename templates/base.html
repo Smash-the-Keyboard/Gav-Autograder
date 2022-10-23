@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Autograder{% block title %}{% endblock %}</title>
+		{% load static %}
+		{# Site Icon #}
+		<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+		{# Standard Inline CSS #}
+		<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+		{% block head_links %}
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+		{% endblock %}
+	</head>
+	<body>
+		{% load admin_urls %}
+		<nav>| <a href="{% url 'home' %}">Home</a> | {% if user.is_staff %}<a href="{% url 'admin:index' %}">Admin</a> | <a href="{% url 'list_students' %}">Students</a> | {% endif %}<a href="{% url 'faq' %}">FAQ</a> | <a href="{% url 'course_list' %}">Courses</a> | <a href="{% if not user.is_authenticated %}{% url 'student_login' %}">Log In{% else %}{% url 'logout' %}">Log Out{% endif %}</a> |</nav>
+		<br>
+		<div class="content-section">
+			{% block header %}{% endblock %}
+			{% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+				<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			{% block content %}{% endblock %}
+		</div>
+	</body>
+	{# Import jQuery #}
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+	{# Import DataTables jQuery plugin #}
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+	{# block for page-specific scripts #}
+	{% block scripts %}
+	{% endblock %}
+</html>

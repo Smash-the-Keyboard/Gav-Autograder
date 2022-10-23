@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load autograder_filters%}
+{% block title %} - {{ object }}{% endblock %}
+{% block header %}<h1>Test Case #{{ object.pk }}</h1>{% endblock %}
+{% block content %}
+<p>For <a href="{% url 'view_assignment' object.assignment.pk %}">{{ object.assignment }}</a></p>
+<h3>Input:</h3>
+<div>{{ object.input }}</div>
+<h3>Output:</h3>
+<pre>{{ object.output|escape|testcaseoutput|safe }}</pre>
+{% if user.is_staff %}
+<h3><u>Staff Actions</u></h3>
+<ul>
+    <li><a href="{% url 'delete_testcase' object.pk %}">Delete Test Case</a></li>
+</ul>
+{% endif %}
+{% endblock %}

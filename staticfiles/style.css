@@ -1,0 +1,102 @@
+body {
+	font-family: monospace;
+}
+.no-whitespace {
+	white-space: nowrap;
+	margin: 0;
+	padding: 0;
+}
+span.feedback-correct {
+	background-color: #dbefd5;
+	color: #51765a;
+}
+span.feedback-incorrect {
+	background-color: #ffd5d8;
+	color: #854b49;
+}
+span.feedback-newline {
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 2px;
+}
+span.feedback-correct.feedback-newline {
+	color: #8db28d;
+}
+span.feedback-incorrect.feedback-newline {
+	color: #c18587;
+}
+nav, .content-section {
+	margin: auto;
+	width: 80%;
+	padding: 10px;
+	display: block;
+	height: 100%;
+}
+.content-section {
+	border: 1px solid black;
+}
+#table {
+	border: 1px solid black;
+}
+.collapsible {
+	background-color: #eee;
+	color: #444;
+	cursor: pointer;
+	padding: 12px;
+	width: 100%;
+	border: none;
+	text-align: left;
+	outline: none;
+	font-size: 15px;
+}
+.active, .collapsible:hover {
+	background-color: #ccc;
+}
+.collapsible-content {
+	padding: 0 18px;
+	overflow: hidden;
+	background-color: #f1f1f1;
+	max-height: 0;
+	transition: max-height 0.2s ease-out;
+}
+/* Added 01/09/2020
+   Forces TAB characters to 4 spaces in PRE tags.
+   Added so that tabs in submissions' source code display correctly. */
+pre {
+	tab-size: 4;
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+}
+/* Added 01/09/2020 */
+pre.source-code {
+	padding: 2px;
+	border: 1px solid black;
+	overflow-x: auto;
+}
+table, th, td {
+	border: 1px solid black;
+}
+th, td {
+	padding: 5px;
+}
+input[type='text'] {
+	font-family: monospace;
+}
+span.testcase-output-newline {
+	color: #888;
+	border: 1px solid #888;
+	border-radius: 2px;
+}
+span.missing-output-message {
+	color: red;
+	font-style: italic;
+}
+#faq-list {
+	list-style-type: none;
+}
+#faq-list * {
+	font-size: 1.05em;
+}
+.faq-question {
+	font-weight: bold;
+}

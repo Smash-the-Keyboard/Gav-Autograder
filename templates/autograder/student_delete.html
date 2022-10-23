@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} - Delete Student{% endblock %}
+{% block header %}<h1>Delete {{ object }} (G00 {{ object.username }})</h1>{% endblock %}
+{% block content %}
+<p>Confirm your deletion of this student.</p>
+<p><b>This will delete all of this student's submissions and test results.</b></p>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Delete</button>
+</form>
+{% endblock %}

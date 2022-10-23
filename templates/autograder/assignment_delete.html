@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} - Delete Assignment{% endblock %}
+{% block header %}<h1>Delete {{ object.title }}</h1>{% endblock %}
+{% block content %}
+<p>Confirm your deletion of this assignment.</p>
+<p><b>This will delete all test cases, submissions, and test results associated with this assignment.</b></p>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Delete</button>
+</form>
+{% endblock %}

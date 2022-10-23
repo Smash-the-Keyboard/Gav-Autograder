@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} - Cancel Submission{% endblock %}
+{% block header %}<h1>Cancel Submission?</h1>{% endblock %}
+{% block content %}
+<p>You will no longer be able to view your test results for this submission.</p>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Yes, Cancel</button>
+</form>
+{% endblock %}

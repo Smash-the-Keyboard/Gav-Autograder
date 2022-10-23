@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load autograder_filters %}
+{% block title %} - Student G00 {{ object.username }}{% endblock %}
+{% block header %}<h1>Student: {{ object }}</h1>{% endblock %}
+{% block content %}
+<h3><u>Information</u></h3>
+<p>
+    Gavilan ID: {{ object.username }}
+    <br>
+    First Name: {{ object.first_name }}
+    <br>
+    Last Name: {{ object.last_name }}
+</p>
+<h3><u>Courses</u></h3>
+<p>Student is enrolled in the following courses</p>
+<ul>
+    {% for course in object.course_set.all %}
+    <li><a href="{% url 'view_course' course.pk %}">{{ course }}</a></li>
+    {% empty %}
+    <li>None</li>
+    {% endfor %}
+</ul>
+{% if object.course_set.all|length < total_courses %}
+<p><a href="{% url 'enroll_student' object.username %}">Enroll student in courses</a></p>
+{% endif %}
+{% if object.course_set.all %}
+<p><a href="{% url 'unenroll_student' object.username %}">Unenroll student from courses</a></p>
+{% endif %}
+<h3><u>Submission Grades</u></h3>
+<form autocomplete="off">
+    <input type="checkbox" id="check-include-unconfirmed"> Include Unconfirmed Submissions
+</form>
+<table class="paged-table">
+    <thead>
+        <tr>
+            <th>Assignment</th>
+            <th>Course</th>
+            <th>Status</th>
+            <th>Grade</th>
+            <th>Date/Time</th>
+            <th>Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for submission in submissions %}
+        <tr>
+            <td><a href="{% url 'view_assignment' submission.assignment.pk %}">{{ submission.assignment }}</a></td>
+            <td><a href="{% url 'view_course' submission.assignment.course.pk %}">{{ submission.assignment.course }}</a></td>
+            <td>{% if submission.confirmed %}Confirmed{% else %}Unconfirmed{% endif %}</td>
+            <td>{{ submission|submissiongrade }}</td>
+            <td>{{ submission.date }}</td>
+            <td><a href="{% url 'view_submission' submission.pk %}">View</a></td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">Student has no submissions</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+{% load static %}
+{% block scripts %}
+	<script type="text/javascript" charset="utf-8" src="{% static 'table_script.js' %}"></script>
+{% endblock %}

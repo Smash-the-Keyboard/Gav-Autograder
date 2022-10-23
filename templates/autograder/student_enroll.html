@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %} - Enroll Student{% endblock %}
+{% block header %}<h1>Enroll {{ object.get_full_name }}</h1>{% endblock %}
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Enroll</button>
+</form>
+{% endblock %}

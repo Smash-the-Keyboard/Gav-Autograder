@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %} - Create Assignment{% endblock %}
+{% block header %}<h1>Create Assignment</h1>{% endblock %}
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Create</button>
+</form>
+{% endblock %}

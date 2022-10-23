@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+	Welcome, {% if user.is_authenticated %}{{ user.get_full_name }}{% else %}Anonymous User{% endif %}
+	<br>
+	{% if user.is_authenticated %}
+		<h3><u>Quick Access</u></h3>
+	{% endif %}
+	{% if user.is_staff %}
+		<ul>
+			<li><a href="{% url 'recent_submissions_list' %}">Recent Submissions</a></li>
+			<li><a href="{% url 'list_students' %}">Manage Students</a></li>
+		</ul>
+	{% elif user.is_authenticated %}
+		<ul>
+			<li>View <a href="{% url 'course_list' %}">Courses</a> you are enrolled in</li>
+			<li>Upload & submit programs for your assignments</li>
+		</ul>
+	{% else %}
+		<p>You may view a list of <a href="{% url 'course_list' %}">Courses</a>, but will need to <a href="{% url 'student_login' %}">log in</a> to access most features</p>
+	{% endif %}
+{% endblock %}

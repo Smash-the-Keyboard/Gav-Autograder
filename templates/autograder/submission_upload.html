@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} - Upload Submission{% endblock %}
+{% block header %}<h1>Upload Assignment Submission</h1>{% endblock %}
+{% block content %}
+<p>For: <a href="{% url 'view_assignment' assignment.id %}">{{ assignment }}</a></p>
+<p>You can view your results before confirming or cancelling your submission.</p>
+<form enctype="multipart/form-data" method="POST" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Upload</button>
+</form>
+{% endblock %}

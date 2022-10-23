@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} - Delete Test Case{% endblock %}
+{% block header %}<h1>Delete Test Case #{{ object.pk }}</h1>{% endblock %}
+{% block content %}
+<p>Confirm your deletion of this test case.</p>
+<p><b>This will delete all test outputs associated with this test case.</b></p>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Delete</button>
+</form>
+{% endblock %}

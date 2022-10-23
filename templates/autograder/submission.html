@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load autograder_filters %}
+{% block title %}
+	{% if not submission.confirmed %}Unconfirmed {% endif %}Submission
+{% endblock %}
+{% block header %}
+	<h1>{% if not submission.confirmed %}Unconfirmed {% endif %}Submission for {{ submission.assignment.title }}</h1>
+{% endblock %}
+{% block content %}
+	<a href="{% url 'view_assignment' object.assignment.pk %}">&lt;- Back to {{ submission.assignment.title }}</a>
+	<br>
+	{% if submission.confirmed %}
+		<p>Submitted {{ submission.date|date:"m/d/y h:i A" }}</p>
+	{% endif %}
+	<h2>-{% if not submission.confirmed %}Preliminary {% endif %}Grade-</h2>
+	<p>{{ submission|submissiongrade }}</p>
+	<h2>-Test Case Results-</h2>
+	{% include 'autograder/test_results.html' %}
+	{% if not submission.confirmed and not user.is_staff %}
+		<p>
+			<button type="button"><a href="{% url 'confirm_submission' object.pk %}">SUBMIT</a></button>
+			<button type="button"><a href="{% url 'delete_submission' object.pk %}">CANCEL</a></button>
+		</p>
+	{% endif %}
+	<h2>-Program Source Code-</h2>
+	<p><a href="{{ submission.build_download_url }}">Download {{ submission.source_file|filebasename }}</a></p>
+	<pre class="source-code">{{ source_file_contents }}</pre>
+{% endblock %}

@@ -1,0 +1,17 @@
+<div>
+    {% if test_results.compiles %}
+    {% for test in test_results.tests %}
+    <div>
+        <h3>Test {{ forloop.counter }}: {% if test.passed %}PASSED{% else %}FAILED{% endif %}</h3>
+        <h5>Input:</h5>
+        <div>{{ test.input }}</div>
+        <h5>Output:</h5>
+        <div>
+            {% for char in test.output %}<span class="feedback-{% if char.incorrect %}incorrect{% else %}correct{% endif %}{% if char.newline %} feedback-newline">\n<br>{% else %}">{% ifequal char.char ' ' %}&nbsp;{% else %}{{ char.char }}{% endifequal %}{% endif %}</span>{% endfor %}{% if test.missing_output > 0 %}<br><span class="missing-output-message">({{ test.missing_output }} characters missing)</span>{% endif %}
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>Compilation failed or timed out. No test results to report.</p>
+    {% endif %}
+</div>

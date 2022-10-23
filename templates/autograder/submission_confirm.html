@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} - Confirm Submission{% endblock %}
+{% block header %}<h1>Confirm Submission?</h1>{% endblock %}
+{% block content %}
+<p>You cannot delete a submission after it has been confirmed, but you may make further submissions.</p>
+<form method="POST" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Yes, Confirm</button>
+</form>
+{% endblock %}

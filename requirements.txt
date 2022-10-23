@@ -1,0 +1,17 @@
+asgiref==3.3.4
+certifi==2021.10.8
+charset-normalizer==2.0.12
+colorclass==2.2.0
+Django==3.2.3
+docker==5.0.3
+idna==3.3
+mod-wsgi==4.6.7
+mysqlclient==1.4.2.post1
+pkg_resources==0.0.0
+python-dotenv==0.16.0
+pytz==2019.1
+requests==2.27.1
+sqlparse==0.3.0
+typing-extensions==3.10.0.0
+urllib3==1.26.9
+websocket-client==1.3.1
