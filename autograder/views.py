@@ -17,11 +17,6 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormVi
 from .forms import *
 from .models import *
 
-def log(msg):
-	from django.conf import settings
-	from os.path import join
-	with open(join(settings.MEDIA_ROOT, 'views-log.txt'), 'a+') as f:
-		f.write(msg + '\n')
 
 class Home(TemplateView):
 	template_name = 'autograder/index.html'

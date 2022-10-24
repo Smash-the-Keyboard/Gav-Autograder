@@ -194,10 +194,6 @@ class Submission(models.Model):
         # Remove
         container.remove()
 
-        with open(os.path.join(settings.MEDIA_ROOT, 'log.txt'), 'a+') as log:
-            log.write('Test output:\n')
-            log.write(container_output)
-
         # Create TestOutput object
         TestOutput.objects.create(
             submission=self,
